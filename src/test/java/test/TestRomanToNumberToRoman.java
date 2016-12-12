@@ -70,6 +70,11 @@ public class TestRomanToNumberToRoman {
 	
 	@Test
 	public void aVeryLargeRomanNumeralWithManyOfTheSameNumeralWithSubtraction() {
-		assertEquals(4934, roman.toNumber("MMMMCMXXXIV"));
+		assertEquals(3934, roman.toNumber("MMMCMXXXIV"));
+	}
+	
+	@Test
+	public void aVeryLargeRomanNumeralWithThreeOfTheSameNumeralWithoutSubtraction() {
+		assertEquals(3000, roman.toNumber("MMM"));
 	}
 }
