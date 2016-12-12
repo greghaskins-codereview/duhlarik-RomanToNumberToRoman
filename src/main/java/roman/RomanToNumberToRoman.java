@@ -9,31 +9,31 @@ public class RomanToNumberToRoman {
 
 		int intValueOfRoman = 0;
 		char currentRoman;
-		int currentNumber = 0;
-		int leftNumber = 0;
+		int valueOfCurrentRoman = 0;
+		int valueOfRomanToTheLeft = 0;
 		int i = roman.length() - 1;
 		while (i >= 0) {
 			currentRoman = roman.charAt(i);
-			currentNumber = getIntValueOfCurrentRoman(currentRoman);
-			leftNumber = getIntValueOfRomanToTheLeft(roman, leftNumber, i);
-				if (leftNumber > 0 && leftNumber < currentNumber) {
-					leftNumber *= -1;
-					currentNumber += leftNumber;
+			valueOfCurrentRoman = getIntValueOfCurrentRoman(currentRoman);
+			valueOfRomanToTheLeft = getIntValueOfRomanToTheLeft(roman, valueOfRomanToTheLeft, i);
+				if (valueOfRomanToTheLeft > 0 && valueOfRomanToTheLeft < valueOfCurrentRoman) {
+					valueOfRomanToTheLeft *= -1;
+					valueOfCurrentRoman += valueOfRomanToTheLeft;
 					i--;
 				}
-			intValueOfRoman += currentNumber;
+			intValueOfRoman += valueOfCurrentRoman;
 			i--;
 		}
 		return intValueOfRoman;
 	}
 
-	private int getIntValueOfRomanToTheLeft(String roman, int leftNumber, int i) {
-		char leftRoman;
+	private int getIntValueOfRomanToTheLeft(String roman, int valueOfRomanToTheLeft, int i) {
+		char romanToTheLeft;
 		if(i > 0) {
-			leftRoman = roman.charAt(i-1);
-			leftNumber = getIntValueOfCurrentRoman(leftRoman);
+			romanToTheLeft = roman.charAt(i-1);
+			valueOfRomanToTheLeft = getIntValueOfCurrentRoman(romanToTheLeft);
 		}
-		return leftNumber;
+		return valueOfRomanToTheLeft;
 	}
 
 	private int getIntValueOfCurrentRoman(char currentRoman) {
