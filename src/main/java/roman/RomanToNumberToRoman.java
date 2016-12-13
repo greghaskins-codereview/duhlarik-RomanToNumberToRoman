@@ -16,6 +16,7 @@ public class RomanToNumberToRoman {
 			currentRoman = roman.charAt(i);
 			valueOfCurrentRoman = getIntValueOfCurrentRoman(currentRoman);
 			if (valueOfCurrentRoman > 0 && valueOfCurrentRoman < valueOfPreviousRoman) {
+
 				valueOfCurrentRoman *= -1;
 			}
 			intValueOfRoman += valueOfCurrentRoman;
@@ -34,5 +35,41 @@ public class RomanToNumberToRoman {
 			}
 		}
 		return currentNumber;
+	}
+
+	public String toRoman(int number) {
+		StringBuilder sb = new StringBuilder();
+		char currentNumeral = ' ';
+		if (number < 4) {
+			while (number > 0) {
+				currentNumeral = romans[0];
+				sb.append(currentNumeral);
+				number--;
+			}
+		} else if (number == 4) {
+			sb.append('I');
+			sb.append('V');
+		} else if (number > 5 && number < 9) {
+			sb.append('V');
+			number -= 5;
+			while (number > 0) {
+				currentNumeral = romans[0];
+				sb.append(currentNumeral);
+				number--;
+			}
+		} else if (number == 9) {
+			sb.append('I');
+			sb.append('X');
+		} else {
+			for (int k = 0; k < numbers.length; k++) {
+				if (number == numbers[k]) {
+					currentNumeral = romans[k];
+					sb.append(currentNumeral);
+					break;
+				}
+			}
+		}
+
+		return sb.toString();
 	}
 }
