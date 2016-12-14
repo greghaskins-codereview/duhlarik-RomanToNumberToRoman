@@ -40,7 +40,23 @@ public class RomanToNumberToRoman {
 	public String toRoman(int number) {
 		StringBuilder sb = new StringBuilder();
 		char currentNumeral = ' ';
-		int checkNumber = 0;
+		int powerOf = 0;
+		int baseNumber = 0;
+		while (number > 9) {
+			powerOf = (int) (Math.log10(number));
+			baseNumber = (int) java.lang.Math.pow(10, powerOf);
+			while (powerOf > 0) {
+				for (int k = numbers.length - 1; k >= 0; k--) {
+					if (baseNumber == numbers[k]) {
+						currentNumeral = romans[k];
+						sb.append(currentNumeral);
+						number -= baseNumber;
+						powerOf--;
+						break;
+					}
+				}
+			}
+		}
 		if (number < 4) {
 			while (number > 0) {
 				currentNumeral = romans[0];
@@ -49,6 +65,8 @@ public class RomanToNumberToRoman {
 			}
 		} else if (number == 4) {
 			sb.append('I');
+			sb.append('V');
+		} else if (number == 5) {
 			sb.append('V');
 		} else if (number > 5 && number < 9) {
 			sb.append('V');
@@ -61,15 +79,6 @@ public class RomanToNumberToRoman {
 		} else if (number == 9) {
 			sb.append('I');
 			sb.append('X');
-		} else {
-			for (int k = numbers.length - 1; k >= 0; k--) {
-				while (number >= numbers[k]) {
-					currentNumeral = romans[k];
-					sb.append(currentNumeral);
-					checkNumber = numbers[k];
-					number -= checkNumber;
-				}
-			}
 		}
 		return sb.toString();
 	}
