@@ -120,4 +120,14 @@ public class TestRomanToNumberToRoman {
 	public void theNumber13ToARomanWithAddition_XIII() {
 		assertEquals("XIII", input.toRoman(13));
 	}
+
+	@Test
+	public void theNumber14ToARomanWithSubtraction_XIV() {
+		assertEquals("XIV", input.toRoman(14));
+	}
+
+	@Test
+	public void powerOfTest() {
+		assertEquals("MMM", input.toRoman(3000));
+	}
 }
