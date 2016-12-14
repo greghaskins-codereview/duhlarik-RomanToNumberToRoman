@@ -40,6 +40,7 @@ public class RomanToNumberToRoman {
 	public String toRoman(int number) {
 		StringBuilder sb = new StringBuilder();
 		char currentNumeral = ' ';
+		int checkNumber = 0;
 		if (number < 4) {
 			while (number > 0) {
 				currentNumeral = romans[0];
@@ -61,15 +62,15 @@ public class RomanToNumberToRoman {
 			sb.append('I');
 			sb.append('X');
 		} else {
-			for (int k = 0; k < numbers.length; k++) {
-				if (number == numbers[k]) {
+			for (int k = numbers.length - 1; k >= 0; k--) {
+				while (number >= numbers[k]) {
 					currentNumeral = romans[k];
 					sb.append(currentNumeral);
-					break;
+					checkNumber = numbers[k];
+					number -= checkNumber;
 				}
 			}
 		}
-
 		return sb.toString();
 	}
 }
