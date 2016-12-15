@@ -42,17 +42,32 @@ public class RomanToNumberToRoman {
 		char currentNumeral = ' ';
 		int powerOf = 0;
 		int baseNumber = 0;
+		int numberOfRomans = 0;
 		while (number > 9) {
 			powerOf = (int) (Math.log10(number));
-			baseNumber = (int) java.lang.Math.pow(10, powerOf);
-			while (powerOf > 0) {
-				for (int k = numbers.length - 1; k >= 0; k--) {
-					if (baseNumber == numbers[k]) {
-						currentNumeral = romans[k];
-						sb.append(currentNumeral);
-						number -= baseNumber;
-						powerOf--;
-						break;
+			baseNumber = (int) (Math.pow(10, powerOf));
+			int newBaseNumber = 0;
+			numberOfRomans = number / baseNumber;
+			while (numberOfRomans > 0) {
+				if (numberOfRomans == 4) {
+					newBaseNumber = baseNumber * 5;
+					for (int m = numbers.length - 1; m >= 0; m--) {
+						if (newBaseNumber == numbers[m]) {
+							sb.append(romans[m - 1]);
+							sb.append(romans[m]);
+							number -= (baseNumber * 4);
+							numberOfRomans = 0;
+						}
+					}
+				} else {
+					for (int k = numbers.length - 1; k >= 0; k--) {
+						if (baseNumber == numbers[k]) {
+							currentNumeral = romans[k];
+							sb.append(currentNumeral);
+							number -= baseNumber;
+							numberOfRomans--;
+							break;
+						}
 					}
 				}
 			}

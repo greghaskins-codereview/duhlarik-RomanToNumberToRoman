@@ -130,4 +130,19 @@ public class TestRomanToNumberToRoman {
 	public void powerOfTest() {
 		assertEquals("MMM", input.toRoman(3000));
 	}
+
+	@Test
+	public void theNumber19ToARomanWithSubtraction_XIX() {
+		assertEquals("XIX", input.toRoman(19));
+	}
+
+	@Test
+	public void theNumber333ToARomanWithoutAdditionOrSubtraction_CCCXXXIII() {
+		assertEquals("CCCXXXIII", input.toRoman(333));
+	}
+	
+	@Test
+	public void theNumber340ToARomanWithSubtraction_CCCXL() {
+		assertEquals("CCCXL", input.toRoman(340));
+	}
 }
