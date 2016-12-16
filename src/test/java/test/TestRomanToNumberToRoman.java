@@ -33,7 +33,7 @@ public class TestRomanToNumberToRoman {
 	}
 
 	@Test
-	public void twoDifferentRomanNumeralsSubtractedToGetNumber() {
+	public void twoDifferentRomanNumeralsSubtractedToGetANumber() {
 		assertEquals(4, input.toNumber("IV"));
 		assertEquals(9, input.toNumber("IX"));
 	}
@@ -56,93 +56,40 @@ public class TestRomanToNumberToRoman {
 		assertEquals(439, input.toNumber("CDXXXIX"));
 		assertEquals(3934, input.toNumber("MMMCMXXXIV"));
 	}
-
-	@Test
-	public void theNumber1ToASingleRomanI() {
-		assertEquals("I", input.toRoman(1));
-	}
-
-	@Test
-	public void theNumber2ToTwoOfTheSameRomanNumeral_II() {
-		assertEquals("II", input.toRoman(2));
-	}
-
-	@Test
-	public void theNumber3ToThreeOfTheSameRomanNumeral_III() {
-		assertEquals("III", input.toRoman(3));
-	}
-	@Test
-	public void theNumber4ToARomanNumeralWithSubtraction_IV() {
-		assertEquals("IV", input.toRoman(4));
-	}
 	
 	@Test
-	public void theNumber5ToASingleRomanV() {
+	public void aNumberToASingleRoman() {
+		assertEquals("I", input.toRoman(1));
 		assertEquals("V", input.toRoman(5));
-	}
-
-	@Test
-	public void theNumber6ToARomanWithAddition_VI() {
-		assertEquals("VI", input.toRoman(6));
-	}
-
-	@Test
-	public void theNumber7ToARomanWithAddition_VII() {
-		assertEquals("VII", input.toRoman(7));
-	}
-
-	@Test
-	public void theNumber8ToARomanWithAddition_VIII() {
-		assertEquals("VIII", input.toRoman(8));
-	}
-
-	@Test
-	public void theNumber9ToARomanWithSubtraction_IX() {
-		assertEquals("IX", input.toRoman(9));
-	}
-
-	@Test
-	public void theNumber10ToASingleRoman_X() {
 		assertEquals("X", input.toRoman(10));
 	}
 
 	@Test
-	public void theNumber11ToARomanWithAddition_XI() {
-		assertEquals("XI", input.toRoman(11));
+	public void aNumberToMultipleRomansNoAdditionOrSubtraction() {
+		assertEquals("II", input.toRoman(2));
+		assertEquals("III", input.toRoman(3));
+		assertEquals("MMMCCCXXXIII", input.toRoman(3333));
 	}
 	
 	@Test
-	public void theNumber12ToARomanWithAddition_XII() {
-		assertEquals("XII", input.toRoman(12));
+	public void aNumberToARomanNumeralWithAddition() {
+		assertEquals("VI", input.toRoman(6));
+		assertEquals("VII", input.toRoman(7));
+		assertEquals("VIII", input.toRoman(8));
 	}
 
 	@Test
-	public void theNumber13ToARomanWithAddition_XIII() {
-		assertEquals("XIII", input.toRoman(13));
-	}
-
-	@Test
-	public void theNumber14ToARomanWithSubtraction_XIV() {
+	public void aNumberToARomanNumeralWithSubtraction() {
+		assertEquals("IV", input.toRoman(4));
+		assertEquals("IX", input.toRoman(9));
 		assertEquals("XIV", input.toRoman(14));
 	}
-
-	@Test
-	public void powerOfTest() {
-		assertEquals("MMM", input.toRoman(3000));
-	}
-
-	@Test
-	public void theNumber19ToARomanWithSubtraction_XIX() {
-		assertEquals("XIX", input.toRoman(19));
-	}
-
-	@Test
-	public void theNumber333ToARomanWithoutAdditionOrSubtraction_CCCXXXIII() {
-		assertEquals("CCCXXXIII", input.toRoman(333));
-	}
 	
 	@Test
-	public void theNumber340ToARomanWithSubtraction_CCCXL() {
-		assertEquals("CCCXL", input.toRoman(340));
+	public void aNumberToARomanWithMultipleSubtractions() {
+		assertEquals("XLIX", input.toRoman(49));
+		assertEquals("CCXLIX", input.toRoman(249));
+		assertEquals("CCCXCIV", input.toRoman(394));
+		assertEquals("MMMCMXLIX", input.toRoman(3949));
 	}
 }

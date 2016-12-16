@@ -15,8 +15,7 @@ public class RomanToNumberToRoman {
 		while (i >= 0) {
 			currentRoman = roman.charAt(i);
 			valueOfCurrentRoman = getIntValueOfCurrentRoman(currentRoman);
-			if (valueOfCurrentRoman > 0 && valueOfCurrentRoman < valueOfPreviousRoman) {
-
+			if (valueOfCurrentRoman < valueOfPreviousRoman) {
 				valueOfCurrentRoman *= -1;
 			}
 			intValueOfRoman += valueOfCurrentRoman;
@@ -38,63 +37,59 @@ public class RomanToNumberToRoman {
 	}
 
 	public String toRoman(int number) {
-		StringBuilder sb = new StringBuilder();
-		char currentNumeral = ' ';
+		StringBuilder finalRoman = new StringBuilder();
 		int powerOf = 0;
 		int baseNumber = 0;
-		int numberOfRomans = 0;
-		while (number > 9) {
-			powerOf = (int) (Math.log10(number));
+		int remainder = number;
+		int specialCaseTest;
+		final int specialCaseFor4 = 4;
+		final int specialCaseFor9 = 9;
+		while (remainder > 0) {
+			powerOf = (int) (Math.log10(remainder));
 			baseNumber = (int) (Math.pow(10, powerOf));
-			int newBaseNumber = 0;
-			numberOfRomans = number / baseNumber;
-			while (numberOfRomans > 0) {
-				if (numberOfRomans == 4) {
-					newBaseNumber = baseNumber * 5;
-					for (int m = numbers.length - 1; m >= 0; m--) {
-						if (newBaseNumber == numbers[m]) {
-							sb.append(romans[m - 1]);
-							sb.append(romans[m]);
-							number -= (baseNumber * 4);
-							numberOfRomans = 0;
-						}
-					}
-				} else {
-					for (int k = numbers.length - 1; k >= 0; k--) {
-						if (baseNumber == numbers[k]) {
-							currentNumeral = romans[k];
-							sb.append(currentNumeral);
-							number -= baseNumber;
-							numberOfRomans--;
-							break;
-						}
-					}
-				}
+			specialCaseTest = remainder / baseNumber;
+			if (specialCaseTest == specialCaseFor9) {
+				remainder = specialCaseFor9(finalRoman, baseNumber, remainder, specialCaseFor9);
+			} else if (specialCaseTest == specialCaseFor4) {
+				remainder = specialCaseFor4(finalRoman, baseNumber, remainder, specialCaseFor4);
+			} else
+				remainder = findARegularRomanNumeral(finalRoman, remainder);
+		}
+		return finalRoman.toString();
+	}
+
+	private int findARegularRomanNumeral(StringBuilder finalRoman, int remainder) {
+		for (int k = numbers.length - 1; k >= 0; k--) {
+			if (remainder >= numbers[k]) {
+				finalRoman.append(romans[k]);
+				remainder -= numbers[k];
+				break;
 			}
 		}
-		if (number < 4) {
-			while (number > 0) {
-				currentNumeral = romans[0];
-				sb.append(currentNumeral);
-				number--;
+		return remainder;
+	}
+
+	private int specialCaseFor4(StringBuilder finalRoman, int baseNumber, int remainder, final int specialCaseFor4) {
+		for (int m = numbers.length - 1; m >= 0; m--) {
+			if (baseNumber == numbers[m]) {
+				finalRoman.append(romans[m]);
+				finalRoman.append(romans[m + 1]);
+				remainder -= (specialCaseFor4 * baseNumber);
+				break;
 			}
-		} else if (number == 4) {
-			sb.append('I');
-			sb.append('V');
-		} else if (number == 5) {
-			sb.append('V');
-		} else if (number > 5 && number < 9) {
-			sb.append('V');
-			number -= 5;
-			while (number > 0) {
-				currentNumeral = romans[0];
-				sb.append(currentNumeral);
-				number--;
-			}
-		} else if (number == 9) {
-			sb.append('I');
-			sb.append('X');
 		}
-		return sb.toString();
+		return remainder;
+	}
+
+	private int specialCaseFor9(StringBuilder finalRoman, int baseNumber, int remainder, final int specialCaseFor9) {
+		for (int m = numbers.length - 1; m >= 0; m--) {
+			if (baseNumber == numbers[m]) {
+				finalRoman.append(romans[m]);
+				finalRoman.append(romans[m + 2]);
+				remainder -= (specialCaseFor9 * baseNumber);
+				break;
+			}
+		}
+		return remainder;
 	}
 }
