@@ -1,1 +1,5 @@
 pom.xml
+.DS_Store
+src/.DS_Store
+src/test/.DS_Store
+src/test/java/.DS_Store

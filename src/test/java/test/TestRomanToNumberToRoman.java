@@ -67,7 +67,8 @@ public class TestRomanToNumberToRoman {
 	@Test
 	public void aNumberToMultipleRomansNoAdditionOrSubtraction() {
 		assertEquals("II", input.toRoman(2));
-		assertEquals("III", input.toRoman(3));
+		assertEquals("XXXIII", input.toRoman(33));
+		assertEquals("CCXXII", input.toRoman(222));
 		assertEquals("MMMCCCXXXIII", input.toRoman(3333));
 	}
 	
@@ -88,8 +89,9 @@ public class TestRomanToNumberToRoman {
 	@Test
 	public void aNumberToARomanWithMultipleSubtractions() {
 		assertEquals("XLIX", input.toRoman(49));
-		assertEquals("CCXLIX", input.toRoman(249));
+		assertEquals("CDXLIX", input.toRoman(449));
 		assertEquals("CCCXCIV", input.toRoman(394));
 		assertEquals("MMMCMXLIX", input.toRoman(3949));
+		assertEquals("MↁCMXLIX", input.toRoman(4949));
 	}
 }
